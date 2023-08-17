@@ -1,0 +1,29 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Source Account</th>
+            <th scope="col">Destination Account</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Created At</th>
+            <th scope="col">User id</th>
+            <button mat-raised-button color="primary" (click)="onClickCreateTransaction()">Add Transaction</button>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let transaction of transactions">
+            <th scope="row">{{transaction.id}}</th>
+            <td>{{transaction.sourceaccount}}</td>
+            <td>{{transaction.destinationaccount}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.createdat}}</td>
+            <td>{{transaction.userid}}</td>
+        </tr>
+    </tbody>
+
+    <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;">
+        <button [disabled]="pageNumber < 1" mat-raised-button color="accent" (click)="previousPage()">previous</button>
+        <button mat-raised-button color="warn" (click)="nextPage()" style="margin-left: 5px;">next</button>
+        <button mat-raised-button color="primary" style="margin-left: 5px;">search</button>
+    </div>
+</table>

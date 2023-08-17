@@ -1,0 +1,28 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Initial Balance</th>
+            <th scope="col">UserId</th>
+            <th scope="col">Created At</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let accountList of accountList">
+            <th scope="row">{{accountList.id}}</th>
+            <td>{{accountList.name}}</td>
+            <td>{{accountList.initialbalance}}</td>
+            <td>{{accountList.userid}}</td>
+            <td>{{accountList.createdat}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<mat-form-field>
+    <mat-label>Account Id: </mat-label>
+    <input matInput placeholder="accountid" [(ngModel)]="id">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="getAccountById()" style="margin-left: 10px;">Find</button>

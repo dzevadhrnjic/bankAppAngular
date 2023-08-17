@@ -1,0 +1,113 @@
+<div class="center">
+<form #userForm="ngForm" appIdentityRevealed appearance="fill">
+    <div [hidden]="userForm.submitted">
+        <div class="cross-validation" [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && 
+        (userForm.touched || userForm.dirty)">
+            <div class="form-group">
+                <label for="firstname">First Name: </label>
+                <input class="form-control" type="firstname" id="firstname" ngModel name="firstname"
+                    placeholder="firstName" [(ngModel)]="firstname" #firstName="ngModel" required minlength="3"
+                    maxlength="30">
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert">
+                    <div *ngIf="firstName.errors?.['required']">
+                        First Name is required
+                    </div>
+                    <div *ngIf="firstName.errors?.['minlength']">
+                        First name must be at least 3 characters
+                    </div>
+                    <div *ngIf="firstName.errors?.['maxlength']">
+                        First name is too long, maximum is 30 characters
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name: </label>
+                <input class="form-control" type="lastname" id="lastname" ngModel name="lastname" placeholder="lastName"
+                    [(ngModel)]="lastname" #lastName="ngModel" required minlength="3" maxlength="30">
+                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
+                    <div *ngIf="lastName.errors?.['required']">
+                        Last Name is required
+                    </div>
+                    <div *ngIf="lastName.errors?.['minlength']">
+                        Last name must be at least 3 characters
+                    </div>
+                    <div *ngIf="lastName.errors?.['maxlength']">
+                        Last name is too long, maximum is 30 characters
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address: </label>
+                <input class="form-control" type="address" id="address" ngModel name="address" placeholder="address"
+                    [(ngModel)]="address" #userAdrress="ngModel" required minlength="2" maxlength="30">
+                <div *ngIf="userAdrress.invalid && (userAdrress.dirty || userAdrress.touched)" class="alert">
+                    <div *ngIf="userAdrress.errors?.['required']">
+                        Address is required
+                    </div>
+                    <div *ngIf="userAdrress.errors?.['minlength']">
+                        Address must be at least 2 characters
+                    </div>
+                    <div *ngIf="userAdrress.errors?.['maxlength']">
+                        Address is too long, maximum is 30 characters
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number: </label>
+                <input class="form-control" type="phonenumber" id="phonenumber" ngModel name="phonenumber" required
+                    phonenumber pattern="^[+]+[1-9]+[0-9]*$" minlength="11" maxlength="11" #phoneNumber="ngModel"
+                    [(ngModel)]="phonenumber">
+                <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert">
+                    <div *ngIf="phoneNumber.errors?.['required']">
+                        Phone Number is required
+                    </div>
+                    <div *ngIf="phoneNumber.errors?.['minlength']">
+                        Phone number must be 10 numbers, and start with +
+                    </div>
+                    <div *ngIf="phoneNumber.errors?.['pattern']">
+                        Wrong pattern, phone number need to start with '+' and just contains numbers
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input class="form-control" type="email" id="email" ngModel name="email" placeholder="email"
+                    [(ngModel)]="email" #userEmail="ngModel" required
+                    pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" minlength="2" maxlength="100">
+                <div *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert">
+                    <div *ngIf="userEmail.errors?.['required']">
+                        Email is required
+                    </div>
+                    <div *ngIf="userEmail.errors?.['minlength']">
+                        Email must be at least 2 characters, and to have
+                    </div>
+                    <div *ngIf="userEmail.errors?.['maxlength']">
+                        Email is too long, maximum is 100 characters
+                    </div>
+                    <div *ngIf="userEmail.errors?.['pattern']">
+                        Wrong pattern. Example: 'mail@mail.com'
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passwrod">Password: </label>
+                <input class="form-control" type="password" id="password" ngModel name="password" placeholder="password"
+                    [(ngModel)]="password" #userPassword="ngModel" required minlength="5" maxlength="20">
+                <div *ngIf="userPassword.invalid && (userPassword.dirty || userPassword.touched)" class="alert">
+                    <div *ngIf="userPassword.errors?.['required']">
+                        Password is required
+                    </div>
+                    <div *ngIf="userPassword.errors?.['minlength']">
+                        Password must be at least 5 characters
+                    </div>
+                    <div *ngIf="userPassword.errors?.['maxlength']">
+                        Password is too long, maximum is 20 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<button [disabled]="!userForm.valid" mat-raised-button color="primary" type="submit" (click)="onEdit()" style="margin-top: 10px;">Edit</button>
+<button mat-raised-button color="warn" (click)="onClickGoBack()" style="margin-left: 5px;">Back</button>
+</div>

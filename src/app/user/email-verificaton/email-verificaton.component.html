@@ -1,0 +1,52 @@
+<div class="col-md-12" style="position: absolute;">
+    <div class="center">
+        <form #verificationForm="ngForm" appIdentityRevealed appearance="fill">
+            <div [hidden]="verificationForm.submitted">
+                <div class="cross-validation" [class.cross-validation-error]="verificationForm.errors?.['identityRevealed'] && 
+                        (verificationForm.touched || verificationForm.dirty)">
+                    <div class="form-group">
+                        <label for="code">Code: </label>
+                        <input class="form-control" type="code" id="code" ngModel name="code" required code
+                            minlength="6" maxlength="6" #code="ngModel">
+                        <div *ngIf="code.invalid && (code.dirty || code.touched)" class="alert">
+                            <div *ngIf="code.errors?.['required']">
+                                Code is required
+                            </div>
+                            <div *ngIf="code.errors?.['minlength']">
+                                Code need to be 6 digits
+                            </div>
+                            <div *ngIf="code.errors?.['maxlength']">
+                                Code can't be longer than 6 digits
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <input class="form-control" type="email" id="email" ngModel name="email" required email
+                                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" minlength="2"
+                                maxlength="100" #email="ngModel">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                                <div *ngIf="email.errors?.['required']">
+                                    Email is required
+                                </div>
+                                <div *ngIf="email.errors?.['minlength']">
+                                    Email must be at least 2 character, and to have @
+                                </div>
+                                <div *ngIf="email.errors?.['maxlength']">
+                                    Email is too long, maximum is 100 characters
+                                </div>
+                                <div *ngIf="email.errors?.['pattern']">
+                                    Wrong pattern. Example: 'mail@mail.com'
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button [disabled]="!verificationForm.valid" mat-raised-button color="primary" type="button"
+                                style="margin-top: 10px;" (click)="onClickVerifyEmail(verificationForm)">Verify
+                                email</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

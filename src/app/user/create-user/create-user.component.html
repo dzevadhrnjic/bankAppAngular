@@ -1,0 +1,113 @@
+<div class="center">
+    <form #userForm="ngForm" appIdentityRevealed appearance="fill">
+        <div [hidden]="userForm.submitted">
+            <div class="cross-validation" [class.cross-validation-error]="userForm.errors?.['identityRevealed'] && 
+        (userForm.touched || userForm.dirty)">
+                <div class="form-group">
+                    <label for="firstname">First Name: </label>
+                    <input class="form-control" type="firstname" id="firstName" ngModel name="firstname" required
+                        firstname minlength="3" maxlength="30" #firstname="ngModel">
+                    <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert">
+                        <div *ngIf="firstname.errors?.['required']">
+                            First Name is required
+                        </div>
+                        <div *ngIf="firstname.errors?.['minlength']">
+                            First name must be at least 3 characters
+                        </div>
+                        <div *ngIf="firstname.errors?.['maxlength']">
+                            First name is too long, maximum is 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name: </label>
+                    <input class="form-control" type="lastname" id="lastname" ngModel name="lastname" required lastname
+                        minlength="3" maxlength="30" #lastname="ngModel">
+                    <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert">
+                        <div *ngIf="lastname.errors?.['required']">
+                            Last Name is required
+                        </div>
+                        <div *ngIf="lastname.errors?.['minlength']">
+                            Last name must be at least 3 characters
+                        </div>
+                        <div *ngIf="lastname.errors?.['maxlength']">
+                            Last name is too long, maximum is 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address: </label>
+                    <input class="form-control" type="address" id="addres" ngModel name="address" required address
+                        minlength="2" maxlength="30" #address="ngModel">
+                    <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert">
+                        <div *ngIf="address.errors?.['required']">
+                            Address is required
+                        </div>
+                        <div *ngIf="address.errors?.['minlength']">
+                            Address must be at least 2 character
+                        </div>
+                        <div *ngIf="address.errors?.['maxlength']">
+                            Address is too long, maximum is 30 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number: </label>
+                    <input class="form-control" type="phonenumber" id="phonenumber" ngModel name="phonenumber" required
+                        phonenumber pattern="^[+]+[1-9]+[0-9]*$" minlength="11" maxlength="11" #phonenumber="ngModel">
+                    <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched)" class="alert">
+                        <div *ngIf="phonenumber.errors?.['required']">
+                            Phone Number is required
+                        </div>
+                        <div *ngIf="phonenumber.errors?.['minlength']">
+                            Phone number must be 10 numbers, and to start with +
+                        </div>
+                        <div *ngIf="phonenumber.errors?.['pattern']">
+                            Wrong pattern, phone number need to start with '+' and just contains numbers
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input class="form-control" type="email" id="email" ngModel name="email" required email
+                        pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" minlength="2" maxlength="100"
+                        #email="ngModel">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                        <div *ngIf="email.errors?.['required']">
+                            Email is required
+                        </div>
+                        <div *ngIf="email.errors?.['minlength']">
+                            Email must be at least 2 character, and to have @
+                        </div>
+                        <div *ngIf="email.errors?.['maxlength']">
+                            Email is too long, maximum is 100 characters
+                        </div>
+                        <div *ngIf="email.errors?.['pattern']">
+                            Wrong pattern. Example: 'mail@mail.com'
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input class="form-control" type="password" id="password" ngModel name="password" required password
+                        minlength="5" maxlength="20" #password="ngModel">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                        <div *ngIf="password.errors?.['required']">
+                            Password is required
+                        </div>
+                        <div *ngIf="password.errors?.['minlength']">
+                            Password must be at least 5 characters
+                        </div>
+                        <div *ngIf="password.errors?.['maxlength']">
+                            Password is too long, maximum is 20 characters
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button [disabled]="!userForm.valid" mat-raised-button color="primary" type="button"
+        (click)="onSaveButtonClick(userForm)" style="margin-right: 5px; margin-top: 10px;">Save</button>
+    <button mat-raised-button color="warn" type="button" (click)="onClickGoBack()" style="margin-top: 10px;">Go
+        Back</button>
+</div>
