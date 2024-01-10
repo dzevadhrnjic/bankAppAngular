@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'app/services/account.service';
+import { AuthService } from 'app/services/auth.service';
 import { Account } from 'app/services/model/account';
+import { User } from 'app/services/model/user';
+import { UserLogin } from 'app/services/model/userLogin';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-list-accounts',
@@ -10,19 +14,25 @@ import { Account } from 'app/services/model/account';
 })
 export class ListAccountsComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private router: Router, private route: ActivatedRoute) { }
+  userToken!: any | null;
+  userIdFromToken!: any | null;
 
   accounts: Account[] = []
 
+  name: string = '';
   pageNumber: number = 0;
   pageSize: number = 10;
+
+  constructor(private accountService: AccountService, private router: Router, private route: ActivatedRoute, private authService: AuthService) { 
+    this.userToken = localStorage.getItem('user')
+    this.userIdFromToken = this.authService.getUserIdFromToken(this.userToken)
+  }
 
   ngOnInit(): void {
 
     this.accountService.dataRefreshed.subscribe(data => {
       if (data) {
-        this.accountService.getAccounts(this.pageNumber, this.pageSize).subscribe(data => {
-          console.log(data)
+        this.accountService.getAccounts(this.pageNumber, this.pageSize, this.name).subscribe(data => {
           this.accounts = data
         })
       }
@@ -32,9 +42,8 @@ export class ListAccountsComponent implements OnInit {
   }
 
   getAccounts() {
-    this.accountService.getAccounts(this.pageNumber, this.pageSize).subscribe(data => {
+    this.accountService.getAccounts(this.pageNumber, this.pageSize, this.name).subscribe(data => {
       this.accounts = data
-      console.log(data)
     })
   }
 
@@ -46,14 +55,6 @@ export class ListAccountsComponent implements OnInit {
   nextPage() {
     this.pageNumber++
     this.getAccounts()
-  }
-
-  onClickListAccountById() {
-    this.router.navigate(['account'], { relativeTo: this.route })
-  }
-
-  onClickSearchAccount() {
-    this.router.navigate(['userAccounts'], { relativeTo: this.route })
   }
 
   onClickCreateAccount() {

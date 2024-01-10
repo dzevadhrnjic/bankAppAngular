@@ -20,11 +20,15 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllUsers(pageNumber: number, pageSize: number) {
+  getAllUsers(pageNumber: number, pageSize: number, firstname: string, lastname: string, address: string, email: string) {
 
     let params = new HttpParams();
     params = params.append('pageNumber', String(pageNumber))
     params = params.append('pageSize', String(pageSize))
+    params = params.append('firstname', String(firstname))
+    params = params.append('lastname', String(lastname))
+    params = params.append('address', String(address))
+    params = params.append('email', String(email))
     return this.httpClient.get<User[]>(this.url + 'allUsers', { params })
   }
 
@@ -33,7 +37,7 @@ export class UserService {
   }
 
   deleteUser(id: number) {
-    return this.httpClient.delete<User>(this.url + id)
+    return this.httpClient.delete<User>(this.url + 'delete/' + id)
   }
 
   getUserById(id: number): Observable<User> {

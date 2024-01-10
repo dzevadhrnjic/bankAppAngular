@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Subject, tap } from 'rxjs';
 import { UserLogin } from './model/userLogin';
 import { Blacklist } from './model/blacklist';
+import jwtDecode from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,6 @@ export class AuthService {
       email, password
     }).pipe(
       tap(user => {
-        console.log(user)
         this.handleAuthentication(user.email, user.password, user.accessToken, user.tokenExpiration)
       })
     )
@@ -59,7 +60,7 @@ export class AuthService {
       next: () => {
         this.user.next(null!),
         this.router.navigate(['/auth']),
-        localStorage.removeItem('accessToken')
+        localStorage.removeItem('user')
       },
       error: () => { alert("Something went wrong") }
     })
@@ -82,4 +83,19 @@ export class AuthService {
     this.autoLogout(tokenExpiration)
     localStorage.setItem('user', JSON.stringify(user))
   }
+
+  getUserIdFromToken(token: string | null): string | null {
+
+    if(!token) {
+      return null;
+    }
+    try {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken?.sub || null
+    } catch(error) {
+      console.log('Error decoding token', error)
+      return null;
+    }
+  }
 }
+

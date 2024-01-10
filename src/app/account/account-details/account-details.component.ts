@@ -3,11 +3,11 @@ import { AccountService } from 'app/services/account.service';
 import { Account } from 'app/services/model/account';
 
 @Component({
-  selector: 'app-list-account-by-id',
-  templateUrl: './list-account-by-id.component.html',
-  styleUrls: ['./list-account-by-id.component.css']
+  selector: 'app-account-details',
+  templateUrl: './account-details.component.html',
+  styleUrls: ['./account-details.component.css']
 })
-export class ListAccountByIdComponent implements OnInit {
+export class AccountDetailsComponent implements OnInit {
 
   id!: number
   account!: Account;
@@ -28,5 +28,4 @@ export class ListAccountByIdComponent implements OnInit {
       error: errorMessage => { alert(errorMessage.error) }
     })
   }
-
 }

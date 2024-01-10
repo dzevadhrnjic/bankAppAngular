@@ -1,1 +1,56 @@
-<p>create-transaction works!</p>
+<div class="center">
+    <form #transactionForm="ngForm" appIdentityRevealed class="example-full-width" appearance="fill">
+        <div [hidden]="transactionForm.submitted">
+            <div class="cross-validation" [class.cross-validation-error]="transactionForm.errors?.['identityRevealed'] &&
+            (transactionForm.touched || transactionForm.dirty)">
+                <div class="form-group">
+                    <label for="sourceaccount">Source Account: </label>
+                    <input class="form-control" type="sourceaccount" id="sourceaccount" ngModel name="sourceaccount"
+                        required value="0" sourceaccount #sourceAccount="ngModel">
+                    <div *ngIf="sourceAccount.invalid && (sourceAccount.dirty || sourceAccount.touched)" class="alert">
+                        <div *ngIf="sourceAccount.errors?.['required']">
+                            Source Account is required
+                        </div>
+                        <div *ngIf="sourceAccount.errors?.['value']">
+                            Source Account can't be null
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="destinationaccount">Destination Account: </label>
+                    <input class="form-control" type="destinationaccount" id="destinationaccount" ngModel
+                        name="destinationaccount" required value="0" destinationaccount #destinationaccount="ngModel">
+                    <div *ngIf="destinationaccount.invalid && (destinationaccount.dirty || destinationaccount.touched)"
+                        class="alert">
+                        <div *ngIf="destinationaccount.errors?.['required']">
+                            Destionation Account is required
+                        </div>
+                        <div *ngIf="destinationaccount.errors?.['value']">
+                            Destionation Account can't be null
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount: </label>
+                    <input class="form-control" type="amount" id="amount" ngModel name="amount" required amount
+                        #amount="ngModel" value="0">
+                    <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="alert">
+                        <div *ngIf="amount.errors?.['required']">
+                            Amount is required
+                        </div>
+                        <div *ngIf="amount.errors?.['value']">
+                            Amount cant be zero or less
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button [disabled]="!transactionForm.valid" mat-raised-button color="primary" type="button"
+        style="margin-right: 5px; margin-top: 10px;" class="buttons-transaction"
+        (click)="onSaveButtonClick(transactionForm)">Save</button>
+    <button mat-raised-button color="warn" type="button" style="margin-top: 10px;" (click)="onClickGoBack()"
+        class="buttons-transaction">Back</button>
+    <div>
+    </div>
+</div>

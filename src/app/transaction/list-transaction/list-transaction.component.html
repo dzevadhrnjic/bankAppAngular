@@ -1,3 +1,29 @@
+<mat-form-field>
+    <mat-label>Order: </mat-label>
+    <mat-select [(ngModel)]="order" name="order"> 
+        <mat-option ngDefaultControl value="asc">Newest</mat-option>
+        <mat-option ngDefaultControl value="desc">Oldest</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field style="margin-left: 5px;">
+    <mat-label>Date from</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="dateFrom">
+    <mat-hint>YYYY/MM/DD</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field style="margin-left: 5px;">
+    <mat-label>Date to</mat-label>
+    <input matInput [matDatepicker]="picker2" [(ngModel)]="dateTo">
+    <mat-hint>YYYY/MM/DD</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+
+<button mat-raised-button color="primary" style="margin-top: 10px; margin-left: 10px;" (click)="getTransactions()">search</button>
+
 <table class="table">
     <thead>
         <tr>
@@ -7,7 +33,7 @@
             <th scope="col">Amount</th>
             <th scope="col">Created At</th>
             <th scope="col">User id</th>
-            <button mat-raised-button color="primary" (click)="onClickCreateTransaction()">Add Transaction</button>
+            <button mat-raised-button color="primary" (click)="onClickCreateTransaction()" style="margin-left: 10px;">Add Transaction</button>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +50,5 @@
     <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;">
         <button [disabled]="pageNumber < 1" mat-raised-button color="accent" (click)="previousPage()">previous</button>
         <button mat-raised-button color="warn" (click)="nextPage()" style="margin-left: 5px;">next</button>
-        <button mat-raised-button color="primary" style="margin-left: 5px;">search</button>
     </div>
 </table>

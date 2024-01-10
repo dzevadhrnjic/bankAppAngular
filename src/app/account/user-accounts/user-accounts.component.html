@@ -13,12 +13,12 @@
         <tr *ngFor="let userAccount of userAccounts">
             <th scope="row">{{userAccount.id}}</th>
             <td>{{userAccount.name}}</td>
-            <td>{{userAccount.initialbalance}}</td>
+            <td>{{userAccount.initialBalance}}</td>
             <td>{{userAccount.userid}}</td>
             <td>{{userAccount.createdat}}</td>
         </tr>
     </tbody>
 </table>
 
-<button mat-raised-button color="primary" (click)="onClickSearchAccountByUserId()">Find</button>
-<button mat-raised-button color="accent" (click)="onClickGoBack()" style="margin-left: 5px;">Go back</button>
+<!-- <button mat-raised-button color="primary" (click)="onClickSearchAccountByUserId()">Find</button> -->
+<button mat-raised-button color="warn" (click)="onClickGoBack()" style="width: 91px;">back</button>

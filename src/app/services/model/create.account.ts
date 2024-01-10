@@ -1,10 +1,10 @@
 export class CreateAccount {
 
     name: string;
-    initialbalance: number
+    initialBalance: number
 
-    constructor(name: string, initialbalance: number) {
+    constructor(name: string, initialBalance: number) {
         this.name = name;
-        this.initialbalance = initialbalance;
+        this.initialBalance = initialBalance;
     }
 }

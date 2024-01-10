@@ -4,20 +4,21 @@ import { AccountService } from 'app/services/account.service';
 import { Account } from 'app/services/model/account';
 
 @Component({
-  selector: 'app-list-accounts-by-user-id',
-  templateUrl: './list-accounts-by-user-id.component.html',
-  styleUrls: ['./list-accounts-by-user-id.component.css']
+  selector: 'app-user-accounts',
+  templateUrl: './user-accounts.component.html',
+  styleUrls: ['./user-accounts.component.css']
 })
-export class ListAccountsByUserIdComponent implements OnInit {
+export class UserAccountsComponent implements OnInit {
 
   userAccounts: Account[] = []
 
   constructor(private accountService: AccountService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.getUsersAccount()
   }
 
-  onClickSearchAccountByUserId() {
+  getUsersAccount() {
     this.accountService.getAccountByUserId().subscribe({
       next: data => { this.userAccounts = data},
       error: () => { alert("Can't find acccounts for this user") }

@@ -16,6 +16,7 @@ export class EditAccountComponent implements OnInit {
   name: string = '';
   initialbalance: number = 0;
   editAccount!: EditAccount;
+  newUser: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) { }
 

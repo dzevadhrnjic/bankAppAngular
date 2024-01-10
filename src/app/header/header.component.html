@@ -13,15 +13,27 @@
                 </li>
             </ul>
         </div>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent"></div>
-        <ul class="navbar-nav text-right">
-            <li *ngIf="isAuthenticated">
-                <button mat-raised-button color="primary" type="button" style="margin-right: 5px;"
-                    (click)="onClickChangePassword()">Change password</button>
-            </li>
-            <li *ngIf="isAuthenticated">
-                <button mat-raised-button color="warn" (click)="onClickLogout()">Logout</button>
-            </li>
-        </ul>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+            <button mat-icon-button color="accent" [matMenuTriggerFor]="menu" mat-raised-button color="primary"
+                *ngIf="isAuthenticated"><mat-icon>menu</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                <ul class="navbar-nav text-right">
+                    <li *ngIf="isAuthenticated">
+                        <button mat-button mat-stroked-button color="primary" type="button" style="margin-right: 5px;" class="menu-button" (click)="onClickSearchAccountByUserId()">My Accounts</button>
+                    </li>
+                    <li *ngIf="isAuthenticated">
+                        <button mat-button mat-stroked-button color="accent" type="button" style="margin-right: 5px;" class="menu-button">My Transactions</button>
+                    </li>
+                    <li *ngIf="isAuthenticated">
+                        <button mat-button mat-stroked-button color="warn" type="button" style="margin-right: 5px;"
+                            (click)="onClickChangePassword()" class="menu-button">Change password</button>
+                    </li>
+                    <li *ngIf="isAuthenticated">
+                        <button mat-button mat-stroked-button color="primary" (click)="onClickLogout()"
+                            class="menu-button">Logout</button>
+                    </li>
+                </ul>
+            </mat-menu>
+        </div>
     </div>
 </nav>

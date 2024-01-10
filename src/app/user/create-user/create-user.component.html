@@ -53,8 +53,8 @@
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number: </label>
-                    <input class="form-control" type="phonenumber" id="phonenumber" ngModel name="phonenumber" required
-                        phonenumber pattern="^[+]+[1-9]+[0-9]*$" minlength="11" maxlength="11" #phonenumber="ngModel">
+                    <input class="form-control" type="phoneNumber" id="phoneNumber" ngModel name="phoneNumber" required
+                        phoneNumber pattern="^[+]+[1-9]+[0-9]*$" minlength="11" maxlength="11" #phonenumber="ngModel">
                     <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched)" class="alert">
                         <div *ngIf="phonenumber.errors?.['required']">
                             Phone Number is required
@@ -108,6 +108,6 @@
     </form>
     <button [disabled]="!userForm.valid" mat-raised-button color="primary" type="button"
         (click)="onSaveButtonClick(userForm)" style="margin-right: 5px; margin-top: 10px;">Save</button>
-    <button mat-raised-button color="warn" type="button" (click)="onClickGoBack()" style="margin-top: 10px;">Go
-        Back</button>
+    <button mat-raised-button color="warn" type="button" (click)="onClickGoBack()"
+        style="margin-top: 10px;">Back</button>
 </div>

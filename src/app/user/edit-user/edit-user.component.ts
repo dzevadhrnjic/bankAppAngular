@@ -14,7 +14,7 @@ export class EditUserComponent implements OnInit {
   firstname: string = '';
   lastname: string = '';
   address: string = '';
-  phonenumber: string = '';
+  phoneNumber: string = '';
   email: string = '';
   password: string = '';
 
@@ -30,7 +30,7 @@ export class EditUserComponent implements OnInit {
         this.firstname = response.firstname
         this.lastname = response.lastname
         this.address = response.address
-        this.phonenumber = response.phonenumber
+        this.phoneNumber = response.phoneNumber
         this.email = response.email
         this.password = response.password
       })
@@ -38,7 +38,7 @@ export class EditUserComponent implements OnInit {
   }
 
   onEdit() {
-    var editUser = new EditUser(this.firstname, this.lastname, this.address, this.phonenumber, this.email, this.password)
+    var editUser = new EditUser(this.firstname, this.lastname, this.address, this.phoneNumber, this.email, this.password)
     this.userService.updateUser(this.id, editUser).subscribe({
       next: () => {
         alert('User successfully updated'),

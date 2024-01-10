@@ -15,11 +15,12 @@ export class AccountService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAccounts(pageNumber: number, pageSize: number): Observable<Account[]> {
+  getAccounts(pageNumber: number, pageSize: number, name: string): Observable<Account[]> {
 
     let params = new HttpParams;
     params = params.append('pageNumber', String(pageNumber))
     params = params.append('pageSize', String(pageSize))
+    params = params.append('name', name)
     var accounts = this.httpClient.get<Account[]>(this.url + 'allAccounts', { params })
     return accounts;
   }

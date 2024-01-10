@@ -1,3 +1,10 @@
+<mat-form-field>
+    <mat-label>Account Name</mat-label>
+    <input matInput placeholder="name" [(ngModel)]="name">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="getAccounts()" style="margin-top: 10px; margin-left: 10px;">search</button>
+
 <table class="table">
     <thead>
         <tr>
@@ -8,31 +15,24 @@
             <th scope="col">Created At</th>
             <th scope="col">Edit Account</th>
             <th scope="col">Delete Account</th>
-            <button mat-raised-button color="primary" (click)="onClickCreateAccount()">Add Account</button>
-            <button mat-raised-button color="accent" style="margin-left: 10px;" (click)="onClickSearchAccount()">Search
-                User Accounts</button>
+            <button class="add-account-button" mat-raised-button color="primary" (click)="onClickCreateAccount()" style="margin-left: 10px;">Add Account</button>
+            <!-- <button class="buttons-account" mat-raised-button color="accent" style="margin-left: 10px;" (click)="onClickSearchAccount()">Search
+                User Accounts</button> -->
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let account of accounts">
             <th scope="row">{{account.id}}</th>
             <td>{{account.name}}</td>
-            <td>{{account.initialbalance}}</td>
+            <td>{{account.initialBalance}}</td>
             <td>{{account.userid}}</td>
             <td>{{account.createdat}}</td>
-            <td><button mat-raised-button color="accent" (click)="onClickEditAccount(account)">Edit</button></td>
-            <td><button mat-raised-button color="warn" (click)="onClickDeleteAccount(account.id)">Delete</button></td>
+            <td><button [disabled]="account.userid != userIdFromToken"  class="buttons-account" mat-raised-button color="accent" (click)="onClickEditAccount(account)">Edit</button></td>
+            <td><button class="buttons-account" mat-raised-button color="warn" (click)="onClickDeleteAccount(account.id)">Delete</button></td>
         </tr>
     </tbody>
 
-    <div>
-    <button mat-raised-button color="primary" (click)="onClickListAccountById()"
-        style="margin-top: 10px;">search</button>
-    </div>
-
     <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 10px;">
-        <button [disabled]="pageNumber < 1" mat-raised-button color="accent" (click)="previousPage()">previous</button>
-        <button mat-raised-button color="warn" (click)="nextPage()" style="margin-left: 5px;">next</button>
-
+        <button class="buttons-account" [disabled]="pageNumber < 1" mat-raised-button color="accent" (click)="previousPage()">previous</button>
+        <button class="buttons-account" mat-raised-button color="warn" (click)="nextPage()" style="margin-left: 5px;">next</button>
     </div>
-</table>

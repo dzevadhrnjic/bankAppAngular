@@ -24,7 +24,7 @@ export class CreateUserComponent implements OnInit {
 
   onSaveButtonClick(form: NgForm) {
     const value = form.value
-    var createUser = new CreateUser(value.firstname, value.lastname, value.address, value.phonenumber, value.email, value.password)
+    var createUser = new CreateUser(value.firstname, value.lastname, value.address, value.phoneNumber, value.email, value.password)
     this.userService.createUser(createUser).subscribe({
       next: () => ('User created'),
       error: () => (alert('Something went wrong, try again'))

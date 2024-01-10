@@ -9,6 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule} from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter'
 
 import { AppComponent } from './app.component';
 import { ListUsersComponent } from './user/list-users/list-users.component';
@@ -18,7 +24,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserComponent } from './user/user.component';
-import { ListUserByIdComponent } from './user/list-user-by-id/list-user-by-id.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { AccountComponent } from './account/account.component';
 import { ListAccountsComponent } from './account/list-accounts/list-accounts.component';
 import { TransactionComponent } from './transaction/transaction.component';
@@ -28,9 +34,21 @@ import { CreateAccountComponent } from './account/create-account/create-account.
 import { AuthComponent } from './auth/auth.component';
 import { EmailVerificatonComponent } from './user/email-verificaton/email-verificaton.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
-import { ListAccountByIdComponent } from './account/list-account-by-id/list-account-by-id.component';
-import { ListAccountsByUserIdComponent } from './account/list-accounts-by-user-id/list-accounts-by-user-id.component';
 import { EditAccountComponent } from './account/edit-account/edit-account.component';
+import { AccountDetailsComponent } from './account/account-details/account-details.component';
+import { UserAccountsComponent } from './account/user-accounts/user-accounts.component';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'YYYY-MM-DD'
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMMM YYYY',
+    dateA1yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
 
 @NgModule({
   declarations: [
@@ -40,7 +58,7 @@ import { EditAccountComponent } from './account/edit-account/edit-account.compon
     EditUserComponent,
     HeaderComponent,
     UserComponent,
-    ListUserByIdComponent,
+    UserDetailsComponent,
     AccountComponent,
     ListAccountsComponent,
     TransactionComponent,
@@ -50,9 +68,9 @@ import { EditAccountComponent } from './account/edit-account/edit-account.compon
     AuthComponent,
     EmailVerificatonComponent,
     ChangePasswordComponent,
-    ListAccountByIdComponent,
-    ListAccountsByUserIdComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    AccountDetailsComponent,
+    UserAccountsComponent,
    ],
   imports: [
     BrowserModule,
@@ -65,13 +83,25 @@ import { EditAccountComponent } from './account/edit-account/edit-account.compon
     MatInputModule,
     MatTableModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule
   ],
   providers: [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
-    multi: true
+    multi: true,
+  },
+  {
+    provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]
+  },
+  { 
+    provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS 
   }
 ],
   bootstrap: [AppComponent]

@@ -1,4 +1,27 @@
-<table class="table">
+<mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="firstname" [(ngModel)]="firstname">
+</mat-form-field>
+
+<mat-form-field style="margin-left: 5px;">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="lastname" [(ngModel)]="lastname">
+</mat-form-field>
+
+<mat-form-field style="margin-left: 5px;">
+    <mat-label>Address</mat-label>
+    <input matInput placeholder="address" [(ngModel)]="address">
+</mat-form-field>
+
+<mat-form-field style="margin-left: 5px;">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="email" [(ngModel)]="email">
+</mat-form-field>
+
+<button class="buttons-user" mat-raised-button color="primary" style="margin-left: 10px;" (click)="getUsers()">Search</button>
+
+<table class="table" >
+
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -6,33 +29,30 @@
             <th scope="col">Phone Number</th>
             <th scope="col">Email</th>
             <th scope="col">Created At</th>
-            <th scope="col">See Details</th>
+            <th scope="col">User Details</th>
             <th scope="col">Edit User</th>
             <th scope="col">Delete User</th>
-            <button mat-raised-button color="primary" (click)="onClickCreateUser()">Add New User</button>
+            <button class="button-create" mat-raised-button color="primary" (click)="onClickCreateUser()">Create User</button>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let user of users">
             <th scope="row">{{user.id}}</th>
             <td>{{user.firstname}} {{user.lastname}}</td>
-            <td>{{user.phonenumber}}</td>
+            <td>{{user.phoneNumber}}</td>
             <td>{{user.email}}</td>
             <td>{{user.createdat}}</td>
-            <td><button mat-raised-button color="primary" (click)="onClickUserDetails(user.id)">Details</button></td>
-            <td><button [routerLink]="['update/edit', user.id]" (click)="onClickEditUser(user)" mat-raised-button
+            <td><button class="buttons-user" mat-raised-button color="primary" (click)="onClickUserDetails(user.id)">Details</button></td>
+            <td><button class="buttons-user" [routerLink]="['update/edit', user.id]" (click)="onClickEditUser(user)" mat-raised-button
                     color="accent">Edit</button></td>
-            <td><button (click)="onClickDeleteUser(user.id)" mat-raised-button color="warn">Delete</button></td>
+            <td><button  class="buttons-user" (click)="onClickDeleteUser(user.id)" mat-raised-button color="warn">Delete</button></td>
         </tr>
     </tbody>
 
-    <div >
-        <button mat-raised-button color="primary" (click)="onClickSearchById()"
-            style="margin-top: 10px;">search</button>
-    </div>
-
-    <div role="group" aria-label="Basic example" style="margin-top: 10px;">
-        <button [disabled]="pageNumber < 1" mat-raised-button color="accent" (click)="previousPage()">previous</button>
-        <button mat-raised-button color="warn" (click)="nextPage()" style="margin-left: 5px;">next</button>
+    <div role="group" aria-label="Basic example" style="margin-top: 10px;" *ngIf="!userById">
+        <button class="buttons-user" [disabled]="pageNumber < 1" mat-raised-button color="accent" (click)="previousPage()">previous</button>
+        <button class="buttons-user" mat-raised-button color="warn" (click)="nextPage()" style="margin-left: 5px;">next</button>
     </div>
 </table>
+<button mat-raised-button color="warn" style="margin-top: 10ox;" (click)="onClickGoBack()"
+    *ngIf="userById">Back</button>
