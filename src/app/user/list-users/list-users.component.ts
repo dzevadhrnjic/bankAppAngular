@@ -35,7 +35,6 @@ export class ListUsersComponent implements OnInit {
         this.userService.getAllUsers(this.pageNumber, this.pageSize, this.firstname, this.lastname, this.address, this.email).subscribe({
           next: (data: User[]) => { this.users = data },
           error: () => { alert('something went wrong') }
-
         })
       }
     })

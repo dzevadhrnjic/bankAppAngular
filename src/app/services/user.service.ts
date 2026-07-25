@@ -29,7 +29,7 @@ export class UserService {
     params = params.append('lastname', String(lastname))
     params = params.append('address', String(address))
     params = params.append('email', String(email))
-    return this.httpClient.get<User[]>(this.url + 'allUsers', { params })
+    return this.httpClient.get<User[]>(this.url, { params })
   }
 
   createUser(createUser: CreateUser) {
